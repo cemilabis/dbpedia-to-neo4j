@@ -1,0 +1,10 @@
+/usr/datasets/dbpedia/dbpedia_2014.owl /usr/datasets/dbpedia/instance_types_en.ttl /usr/datasets/dbpedia/infobox_properties_en.ttl /usr/datasets/dbpedia/labels_en.ttl
+http://dbpedia.org/ontology/EducationalInstitution
+http://dbpedia.org/ontology/Disease
+http://dbpedia.org/ontology/SoccerPlayer
+http://dbpedia.org/ontology/SoccerClub
+http://dbpedia.org/ontology/Politician
+http://dbpedia.org/ontology/OfficeHolder
+http://dbpedia.org/ontology/City
+http://dbpedia.org/ontology/Country
+http://dbpedia.org/ontology/AnatomicalStructure
