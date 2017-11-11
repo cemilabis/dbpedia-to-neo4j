@@ -37,7 +37,7 @@ public class TboxCsvCreator {
             writeHeadersToResourceCsvFile(resourcesWriter);
 
             for(String entity: resources){
-                resourcesWriter.write(String.format("%s,%s,%s",entity,entity,"Dbpedia;Abox")+System.lineSeparator());
+                resourcesWriter.write(String.format("\"%s\",\"%s\",\"%s\"",entity,entity,"Dbpedia;Abox")+System.lineSeparator());
             }
 
         }
@@ -47,7 +47,7 @@ public class TboxCsvCreator {
 
             for(String relation: relations){
                 String[] parts = relation.split(" ");
-                relationsWriter.write(String.format("%s,%s,%s,%s",parts[0],parts[1],parts[2],parts[1])+System.lineSeparator());
+                relationsWriter.write(String.format("\"%s\",\"%s\",\"%s\",\"%s\"",parts[0],parts[1],parts[2],parts[1])+System.lineSeparator());
             }
         }
 

@@ -6,13 +6,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
-        if(args.length==0){
+        if(args.length<2){
             System.out.println("You must give the settings file location as parameter");
         }
         else{
             try {
-                CsvCreator filter = new CsvCreator();
-                filter.filterDbpedia(args[0]);
+                String type = args[0];
+                String fileLocation = args[1];
+
+                if(type.equals("abox")) {
+                    CsvCreator filter = new CsvCreator();
+                    filter.filterDbpedia(fileLocation);
+                }
+                else{
+                    TboxCsvCreator filter = new TboxCsvCreator();
+                    filter.filterDbpedia(fileLocation);
+                }
             }
             catch(Exception ex){
                 ex.printStackTrace(System.out);
