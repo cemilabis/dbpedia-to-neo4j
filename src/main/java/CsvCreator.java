@@ -152,7 +152,7 @@ public class CsvCreator {
     }
 
     private void writeRelationsCsvHeaders(BufferedWriter writer) throws IOException{
-        writer.write(":START_ID(Resource),url,:END_ID(Resource)"+ System.lineSeparator());
+        writer.write(":START_ID(Resource),url,:END_ID(Resource),:TYPE"+ System.lineSeparator());
     }
 
     private void filterInstanceTypesAndWriteToCsvFile(String instanceTypesFile,Set<String> filteredTypes,Writer writer,Set<String> filteredInstances) throws IOException {
@@ -165,15 +165,15 @@ public class CsvCreator {
                     String[] partsOfLine = line.split(" ");
 
                     //We need to check type of subject. As this file only contains type of instances, it is sufficient to check third part
-                    String subjectUrl = escapeTagChars(partsOfLine[0]);
-                    String objectUrl = escapeTagChars(partsOfLine[2]);
+                    String subjectUrl = Tools.escapeTagChars(partsOfLine[0]);
+                    String objectUrl = Tools.escapeTagChars(partsOfLine[2]);
 
                     if (filteredTypes.contains(objectUrl)) {
                         //Write this line through writer
                         writer.write(String.format("\"%s\",\"%s\",\"Dbpedia;Resource\"",subjectUrl,subjectUrl)+ System.lineSeparator());
 
                         //add resource uri to the instance set
-                        filteredInstances.add(escapeTagChars(partsOfLine[0]));
+                        filteredInstances.add(Tools.escapeTagChars(partsOfLine[0]));
                     }
                 }
             }
@@ -189,22 +189,20 @@ public class CsvCreator {
                     //Each line is in form of subject predicate object
                     String[] partsOfLine = line.split(" ");
 
-                    String subjectUrl = escapeTagChars(partsOfLine[0]);
-                    String objectUrl = escapeTagChars(partsOfLine[2]);
-                    String predicate = escapeTagChars(partsOfLine[1]);
+                    String subjectUrl = Tools.escapeTagChars(partsOfLine[0]);
+                    String objectUrl = Tools.escapeTagChars(partsOfLine[2]);
+                    String predicate = Tools.escapeTagChars(partsOfLine[1]);
 
                     //We need to check type of subject and object. If both of them are in filtered instance list, then we will append this line to new file
-                    if (filteredInstances.contains(escapeTagChars(partsOfLine[0])) && filteredInstances.contains(escapeTagChars(partsOfLine[2]))) {
+                    if (filteredInstances.contains(Tools.escapeTagChars(partsOfLine[0])) && filteredInstances.contains(Tools.escapeTagChars(partsOfLine[2]))) {
                         //Write this line through writer
-                        writer.write(String.format("\"%s\",\"%s\",\"%s\"",subjectUrl, predicate,objectUrl)+ System.lineSeparator());
+                        writer.write(String.format("\"%s\",\"%s\",\"%s\"",subjectUrl, predicate,objectUrl,predicate)+ System.lineSeparator());
                     }
                 }
             }
         }
     }
 
-    private String escapeTagChars(String str){
-        return str.replace("<","").replace(">","");
-    }
+
 
 }
